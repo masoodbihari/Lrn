@@ -141,3 +141,287 @@ decimal		7	5	4
 
 
 6.File creation mask
+
+-file creation mask determines default permissions
+-if no mask used permissions would be :
+	777 for directories
+	666 for files
+
+
+==============================================================================================
+Find files and directories
+
+find [path] [expression]
+
+Recursively finds files in that match expression.If no arguments are supplied it find all files in the current directory
+
+Find Options
+
+-name   pattern  : Find files and directories that match pattern
+-iname  pattern  : ignores case
+-ls		 : performs an ls on each of the found items
+-mtime 	days	 : find files that are days old
+-size 	num      : find file that are of size num
+-newer 	file     : finds files that are newer than file
+
+eg : find . -mtime +10 -mtime -13 
+
+
+A fast find -locate
+
+locate pattern
+
+-lists files that match pattern
+-faster than the find command
+-queries an index
+-result are not in real time
+-may not be enabled in all system
+
+==============================================================================================
+Viewing and editing files
+
+1.Different ways to display the contents of files.
+
+cat  file	Display the contents of file
+more file	Browse through a text file
+less file	More feature than more
+head file	Output the beginning portion of file
+tail file	Output the ending portion of file
+
+2.How to use the Nano editor
+
+==============================================================================================
+
+1. What wildcards are?
+
+-A character or string used to for file or directory name.
+-Globbing expands the wildcard pattern into a list of files and/or directories(path).
+-Wildcards can be used with most commands
+	-ls
+	-rm
+	-cp
+wildcards
+* -matches zero or more characters.
+	*.txt
+	a*
+	a*.txt
+? -matches exactly one character.
+	?.txt
+	a?
+	a?.txt 
+[] -a character class which matches any of the character included between the          	     	 brackets.Matches exactly one character.
+	eg :  [aeiou]
+	      ca[nt]*
+		can
+		cat
+		candy
+		catch
+[!] -matches any of the characters not included between the brackets.
+	eg : [!aeiou]
+		baseball
+		cricket
+more wildcards i.e range
+	eg : [a-g]*
+	     [3-6]*
+
+matching wildcard patterns
+
+\  use this if you want to match a wildcard character
+	eg : *\?
+
+[[:digits:]]
+
+2. When and where they can be used?
+3. The different types of wildcards?
+4. How to use wildcards with various commands?
+
+==============================================================================================
+
+1. Three I/O types
+
+I/O Name		Abbreviation		File Descriptor
+standard input		stdin			0
+standard output		stdout			1
+standard error		stderr			2
+
+2. Redirection
+
+>	Redirects standard output to a file.
+	overwrites existing contents.
+>> 	Redirects standard output to a file.
+	appends to any existing contents.
+<	redirects input from a file to a command.
+
+&	used with redirection to signal that a file descriptor is being used.
+
+2>&1	combine stderr and standard output
+
+2>file	redirect standard error to a file
+
+==============================================================================================
+
+Comparing the contents of Files
+
+diff   	file1 file1	compare two files
+sdiff	file1 file2	side-by-side comparison
+vimdiff file1 file2	highlight differences in vim.
+
+==============================================================================================
+
+1.How to search the contents of files.
+
+grep	Display lines matching a pattern
+grep pattern file
+
+grep options
+-i Perform a search,ignoring case
+-c Count the number of occurences in a file
+-n Precede output with line numbers
+-v invert match.Print lines that dont match
+
+eg : grep utpal secret(secret = file name)
+     grep -v o secret
+     grep -ci utpal secret
+     grep -ni utpal secret
+
+Searching for Text in Binary Files
+
+strings 	Display printable strings.
+
+
+2.What pipes are and how to use them.
+
+Pipes
+| Pipe symbol
+command-output | command-input
+
+cat file | grep pattern
+
+==============================================================================================
+
+Copying Files over the Network
+
+SCP-Secure copy
+SFTP-SSH file transger protocol
+
+scp/sftp Command Line Utilities
+scp source destination
+sftp host
+sftp jason@host 
+
+ftp Command Line Utility
+ftp host(but not secure compare to scp/sftp because login credentials are sent in clear text)
+    Start a file transfer session with host	
+
+==============================================================================================
+Aliases
+==============================================================================================
+
+Enironment Variables
+
+What environment variables are?
+
+It is a storage location that has a name and a value.
+Can change how an appliation behaves.
+	eg : EDITOR=nano
+
+What they do?
+
+How to control them(add/delete)?
+
+==============================================================================================
+
+Installing Software
+
+
+
+==============================================================================================
+
+Linux Boot Process
+
+1.BIOS
+-Basic Input/Output System
+-Its operating system independent
+-Primary purpose is to find and execute the boot loader
+-Performs the POST(Power On Self Test)
+-BIOS searches for devices in order given
+	-Hard drives
+	-USB drives
+	-DVD drives
+	-etc
+-Once the boot load device is found BIOS will run the Boot Loader.
+Boot Loader
+LILO
+	Linux Loader
+GRUB
+	Grand Unified Bootloader
+	Replaced LILO
+Boot Loader start the operating system
+Boot loader can start the operating system with different options
+
+Initial RAM Disk
+	-initial RAM disk
+	-temporary filesystem that is loaded from disk and stored in memory
+	-contains helpers and modules required to load the permanent OS file system.
+
+The /boot Directory
+
+The linux kernal,the initial Ram disk and other file needed to boot the operating system are stored in /boot.
+	-contains the files required to boot linux
+	-initrd
+	-kernel
+	-boot loader configuration
+
+Kernel Ring Buffer
+	-contains messages from the Linux Kernel
+	-/var/log/dmesg
+
+2.Boot Loaders
+
+3.Linux Kernel
+4.Runlevels
+
+-linux uses runlevel to determine what processes and services to start.
+
+	Description
+	0		shuts down the system
+	1,S,s		single user mode. Used for maintenance
+	2		Multi-user mode with graphical interface.
+	3		Multi-user text mode(RedHat/CentOS)
+	4		Undefined
+	5		Multi-user mode with graphical interface
+	6		Reboot
+
+Init
+
+-traditionally runlevels were controlled by Init program
+-Init configuration are stored in /etc/inittab:
+
+Systemd
+
+-alternative to Init
+#cd /lib/systemd/system
+#ls -l runlevel15.target
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
